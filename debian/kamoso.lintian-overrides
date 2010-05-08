@@ -1,0 +1,4 @@
+kamoso: shlib-without-versioned-soname usr/lib/libkamosoplugin.so libkamosoplugin.so
+kamoso: no-symbols-control-file usr/lib/libkamosoplugin.so
+kamoso: postinst-must-call-ldconfig usr/lib/libkamosoplugin.so
+kamoso: package-name-doesnt-match-sonames libkamosoplugin

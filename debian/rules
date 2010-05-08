@@ -1,0 +1,3 @@
+#!/usr/bin/make -f
+export DH_VERBOSE=1
+include /usr/share/pkg-kde-tools/makefiles/1/debhelper/kde.mk

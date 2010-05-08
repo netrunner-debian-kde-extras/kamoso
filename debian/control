@@ -1,0 +1,17 @@
+Source: kamoso
+Section: kde
+Priority: extra
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Build-Depends: debhelper (>= 7), cmake, kdebase-workspace-dev, libvlc-dev
+Standards-Version: 3.8.3
+Homepage: http://www.kde-apps.org/content/show.php/Kamoso?content=111750
+Vcs-Browser: http://bazaar.launchpad.net/~kubuntu-members/kamoso/ubuntu
+Vcs-Bzr: https://code.launchpad.net/~kubuntu-members/kamoso/ubuntu
+
+Package: kamoso
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, vlc
+Description: Tool to take pictures and videos from your webcam
+ Kamoso is a utility that does the very simple actions a webcam offers,
+ like taking pictures or recording videos and adds some extra features that will
+ make the webcam usage both funnier and more useful.
