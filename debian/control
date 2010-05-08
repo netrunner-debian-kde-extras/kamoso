@@ -1,12 +1,13 @@
 Source: kamoso
 Section: kde
 Priority: extra
-Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+Maintainer: Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>
+Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
 Build-Depends: debhelper (>= 7), cmake, kdebase-workspace-dev, libvlc-dev
 Standards-Version: 3.8.3
 Homepage: http://www.kde-apps.org/content/show.php/Kamoso?content=111750
-Vcs-Browser: http://bazaar.launchpad.net/~kubuntu-members/kamoso/ubuntu
-Vcs-Bzr: https://code.launchpad.net/~kubuntu-members/kamoso/ubuntu
+Vcs-Svn: svn://svn.debian.org/pkg-kde/kde-extras/kamoso/trunk
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-kde/kde-extras/kamoso/trunk?op=log
 
 Package: kamoso
 Architecture: any
