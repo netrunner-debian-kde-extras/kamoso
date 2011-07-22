@@ -3,7 +3,11 @@ Section: kde
 Priority: extra
 Maintainer: Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>
 Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
-Build-Depends: debhelper (>= 7), cmake, kdebase-workspace-dev, libvlc-dev, pkg-kde-tools (>= 0.5)
+Build-Depends: debhelper (>= 8), pkg-kde-tools (>= 0.5.0),
+ cmake, kdelibs5-dev, libkipi-dev,
+ shared-desktop-ontologies,
+ libqtgstreamer-dev, libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev,
+ libglib2.0-dev
 Standards-Version: 3.8.4
 Homepage: http://www.kde-apps.org/content/show.php/Kamoso?content=111750
 Vcs-Svn: svn://svn.debian.org/pkg-kde/kde-extras/kamoso/trunk
@@ -11,7 +15,8 @@ Vcs-Browser: http://svn.debian.org/wsvn/pkg-kde/kde-extras/kamoso/trunk?op=log
 
 Package: kamoso
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, vlc
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ gstreamer0.10-x, gstreamer0.10-plugins-good
 Description: Tool to take pictures and videos from your webcam
  Kamoso is a utility that does the very simple actions a webcam offers,
  like taking pictures or recording videos and adds some extra features that will
