@@ -17,6 +17,7 @@ Package: kamoso
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  gstreamer0.10-x, gstreamer0.10-plugins-good
+Recommends: kipi-plugins
 Description: tool to take pictures and videos from your webcam
  Kamoso is a utility that does the very simple actions a webcam offers,
  like taking pictures or recording videos and adds some extra features that will
