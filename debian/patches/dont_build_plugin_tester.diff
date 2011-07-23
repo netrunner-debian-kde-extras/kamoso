@@ -1,0 +1,25 @@
+Author: José Manuel Santamaría Lema <panfaust@gmail.com>
+Forwarded: no
+Description: Avoids building the plugin tester.
+---
+ src/CMakeLists.txt |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -8,7 +8,7 @@ if (NEPOMUK_FOUND)
+ endif(NEPOMUK_FOUND)
+ 
+ add_subdirectory(plugins)
+-add_subdirectory(pluginTester)
++#add_subdirectory(pluginTester)
+ 
+ set(kamoso_SRCS
+ 	burstshootmode.cpp
+@@ -58,4 +58,4 @@ endif(HAVE_NEPOMUK)
+ 
+ install(TARGETS kamoso ${INSTALL_TARGETS_DEFAULT_ARGS})
+ install(FILES kamoso.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
+-install(FILES kamosoplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+\ No newline at end of file
++install(FILES kamosoplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
