@@ -1,6 +1,5 @@
-kamoso (2.0.2-1) UNRELEASED; urgency=low
+kamoso (2.0.2-1) unstable; urgency=low
 
   * Initial release (Closes: #577639)
 
- -- José Manuel Santamaría Lema <panfaust@gmail.com>  Sat, 08 May 2010 11:24:46 +0200
-
+ -- José Manuel Santamaría Lema <panfaust@gmail.com>  Sun, 24 Jul 2011 01:20:38 +0200
