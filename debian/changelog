@@ -3,6 +3,7 @@ kamoso (2.0.2++git20130122-2) UNRELEASED; urgency=low
   * New upstream release.
   * Remove about_dialog.diff, applied upstream.
   * Refresh proper_version_kaboutdata.diff.
+  * Refresh dont_build_plugin_tester.diff.
   * Bump debhelper compatibility level to 9. This enables the hardening flags.
   * Add watch file.
   * Update Vcs-* fields.
