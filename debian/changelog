@@ -1,6 +1,7 @@
 kamoso (2.0.2-2) UNRELEASED; urgency=low
 
   * Add watch file.
+  * Update Vcs-* fields.
 
  -- José Manuel Santamaría Lema <panfaust@gmail.com>  Tue, 22 Jan 2013 16:10:49 +0100
 
