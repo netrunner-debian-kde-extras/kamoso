@@ -1,5 +1,6 @@
 kamoso (2.0.2-2) UNRELEASED; urgency=low
 
+  * Bump debhelper compatibility level to 9. This enables the hardening flags.
   * Add watch file.
   * Update Vcs-* fields.
 
