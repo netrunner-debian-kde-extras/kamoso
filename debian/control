@@ -3,7 +3,7 @@ Section: kde
 Priority: extra
 Maintainer: Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>
 Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
-Build-Depends: debhelper (>= 8), pkg-kde-tools (>= 0.5.0),
+Build-Depends: debhelper (>= 9), pkg-kde-tools (>= 0.5.0),
  cmake, kdelibs5-dev, libkipi-dev,
  shared-desktop-ontologies,
  libqtgstreamer-dev, libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev,
