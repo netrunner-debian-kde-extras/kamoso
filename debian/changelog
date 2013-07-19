@@ -1,4 +1,6 @@
-kamoso (2.0.2-2) UNRELEASED; urgency=low
+kamoso (2.0.2-2) unstable; urgency=low
+
+  * Team upload.
 
   [ José Manuel Santamaría Lema ]
   * Bump debhelper compatibility level to 9. This enables the hardening flags.
@@ -17,7 +19,7 @@ kamoso (2.0.2-2) UNRELEASED; urgency=low
   * Bump Standards-Version to 3.9.4, no changes required.
   * Link in as-needed mode.
 
- -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Fri, 19 Jul 2013 15:01:06 +0200
+ -- Pino Toscano <pino@debian.org>  Fri, 19 Jul 2013 15:42:37 +0200
 
 kamoso (2.0.2-1) unstable; urgency=low
 
