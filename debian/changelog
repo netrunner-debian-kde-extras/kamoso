@@ -7,6 +7,9 @@ kamoso (2.0.2-2) UNRELEASED; urgency=low
   * Fix the Vcs-* headers.
   * Backport upstream commit d3c5946f9f48f5d7a5249995424228fc51c84b67 to
     include a needed header; patch upstream_add-include.patch.
+  * Backport upstream commits a0aec903b36b52bda1a9a5d2e875af1063747a86 and
+    9f32257a1e930b16e64508e6fbfa9390fc0322ee to fix compatibility with libkipi
+    2.x; patch upstream_libkipi-2.x.diff.
 
  -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Fri, 19 Jul 2013 15:01:06 +0200
 
