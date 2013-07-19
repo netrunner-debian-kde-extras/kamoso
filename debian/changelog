@@ -5,6 +5,8 @@ kamoso (2.0.2-2) UNRELEASED; urgency=low
 
   [ Pino Toscano ]
   * Fix the Vcs-* headers.
+  * Backport upstream commit d3c5946f9f48f5d7a5249995424228fc51c84b67 to
+    include a needed header; patch upstream_add-include.patch.
 
  -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Fri, 19 Jul 2013 15:01:06 +0200
 
