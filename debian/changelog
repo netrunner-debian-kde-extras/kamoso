@@ -14,6 +14,7 @@ kamoso (2.0.2-2) UNRELEASED; urgency=low
     to rename the youtube icon to kipiplugin_youtube; patch
     upstream_rename-icons.diff. Since renaming sources is not viable, rename
     the actual icons at installation time.
+  * Bump Standards-Version to 3.9.4, no changes required.
 
  -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Fri, 19 Jul 2013 15:01:06 +0200
 
