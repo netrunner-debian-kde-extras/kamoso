@@ -10,6 +10,10 @@ kamoso (2.0.2-2) UNRELEASED; urgency=low
   * Backport upstream commits a0aec903b36b52bda1a9a5d2e875af1063747a86 and
     9f32257a1e930b16e64508e6fbfa9390fc0322ee to fix compatibility with libkipi
     2.x; patch upstream_libkipi-2.x.diff.
+  * Backport part of upstream commit b8b03322d58a920deac198c2360d65deddccd610
+    to rename the youtube icon to kipiplugin_youtube; patch
+    upstream_rename-icons.diff. Since renaming sources is not viable, rename
+    the actual icons at installation time.
 
  -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Fri, 19 Jul 2013 15:01:06 +0200
 

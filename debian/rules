@@ -2,3 +2,9 @@
 
 %:
 	dh $@ --parallel --with kde
+
+override_dh_auto_install:
+	dh_auto_install
+	for icon in `find debian/kamoso -regextype posix-egrep -regex '.*/youtube\.(png|svgz)'`; do \
+	  mv --verbose $$icon `echo $$icon | sed -r -e 's,\<youtube\>,kipiplugin_\0,g'`; \
+	done
