@@ -1,14 +1,58 @@
-kamoso (2.0.2+git20130122-0r1) UNRELEASED; urgency=low
+kamoso (2.9.90~git20150427-0ubuntu1) UNRELEASED; urgency=medium
 
-  * New upstream release.
-  * Remove about_dialog.diff, applied upstream.
-  * Refresh proper_version_kaboutdata.diff.
-  * Refresh dont_build_plugin_tester.diff.
+  * New upstream snapshot of kf5 version
+  * Port packaging to pkg-kde v3
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 27 Apr 2015 15:15:53 +0200
+
+kamoso (2.0.2-2ubuntu3) utopic; urgency=medium
+
+  * Do not build with nepomuk
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Tue, 29 Jul 2014 17:48:25 +0200
+
+kamoso (2.0.2-2ubuntu2) trusty; urgency=medium
+
+  * Add kubuntu_avoid-phonon.patch to not use Phonon anywhere. In trusty
+    phonon-backend-gstreamer uses gstreamer1 whereas kamoso still uses 0.10.
+    This causes runtime symbol clashes when both gstreamers are loaded. Phonon
+    is only used for audbile feedback when taking a snapshot, which is not
+    a particularly important feature to the application at large.
+    This patch also drops unused code portions elsewhere.
+    The patch takes care to only comment out lines, to preserve line count for
+    consistency of backtraces.
+
+ -- Harald Sitter <apachelogger@kubuntu.org>  Thu, 10 Apr 2014 12:50:49 +0200
+
+kamoso (2.0.2-2ubuntu1) trusty; urgency=low
+
+  * Demote kipi-plugins from recommends to suggests.
+    Pulls in all sorts of nonesense on the ISO.
+
+ -- Harald Sitter <apachelogger@kubuntu.org>  Sat, 23 Nov 2013 16:59:29 +0100
+
+kamoso (2.0.2-2) unstable; urgency=low
+
+  * Team upload.
+
+  [ José Manuel Santamaría Lema ]
   * Bump debhelper compatibility level to 9. This enables the hardening flags.
-  * Add watch file.
-  * Update Vcs-* fields.
 
- -- José Manuel Santamaría Lema <panfaust@gmail.com>  Tue, 22 Jan 2013 16:10:49 +0100
+  [ Pino Toscano ]
+  * Fix the Vcs-* headers.
+  * Backport upstream commit d3c5946f9f48f5d7a5249995424228fc51c84b67 to
+    include a needed header; patch upstream_add-include.patch.
+  * Backport upstream commits a0aec903b36b52bda1a9a5d2e875af1063747a86 and
+    9f32257a1e930b16e64508e6fbfa9390fc0322ee to fix compatibility with libkipi
+    2.x; patch upstream_libkipi-2.x.diff.
+  * Backport part of upstream commit b8b03322d58a920deac198c2360d65deddccd610
+    to rename the youtube icon to kipiplugin_youtube; patch
+    upstream_rename-icons.diff. Since renaming sources is not viable, rename
+    the actual icons at installation time.
+  * Bump Standards-Version to 3.9.4, no changes required.
+  * Link in as-needed mode.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 19 Jul 2013 15:42:37 +0200
 
 kamoso (2.0.2-1) unstable; urgency=low
 

@@ -1,2 +1,3 @@
 version=3
-ftp://ftp.kde.org/pub/kde/stable/kamoso/([\d\.]*)/src/kamoso-([\d\.]*).tar.bz2
+
+ftp://ftp.kde.org/pub/kde/stable/kamoso/([\d\.]+)/src/kamoso-([\d\.]+).tar.bz2
