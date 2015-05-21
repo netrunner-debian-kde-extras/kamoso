@@ -27,7 +27,10 @@ Vcs-Browser: http://anonscm.debian.org/cgit/pkg-kde/kde-extras/kamoso.git
 
 Package: kamoso
 Architecture: any
-Depends: qml-modules-org-kde-purpose, gstreamer1.0-plugins-good, ${misc:Depends}, ${shlibs:Depends}
+Depends: gstreamer1.0-plugins-good,
+         qml-modules-org-kde-purpose,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Description: tool to take pictures and videos from your webcam
  Kamoso is a utility that does the very simple actions a webcam offers,
  like taking pictures or recording videos and adds some extra features
