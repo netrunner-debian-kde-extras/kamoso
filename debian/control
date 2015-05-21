@@ -29,6 +29,7 @@ Package: kamoso
 Architecture: any
 Depends: gstreamer1.0-plugins-good,
          qml-modules-org-kde-purpose,
+         qtgstreamer-plugins-qt5,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: tool to take pictures and videos from your webcam
