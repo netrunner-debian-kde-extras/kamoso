@@ -1,0 +1,18 @@
+Author: Rex Dieter <rdieter@fedoraproject.org>
+Description: rename icons to avoid conflict
+ .
+ kamoso's youtube.* icons conflict with kdeplasma-addons' youtube krunner
+ plugin.  Avoid that via simple rename here for now.
+Origin: upstream, commit:b8b03322d58a920deac198c2360d65deddccd610
+
+--- a/src/plugins/youtube/kipiplugin_youtube.desktop
++++ b/src/plugins/youtube/kipiplugin_youtube.desktop
+@@ -1,7 +1,7 @@
+ [Desktop Entry]
+ Type=Service
+ Exec=blubb
+-Icon=youtube
++Icon=kipiplugin_youtube
+ Comment=Upload videos directly to YouTube
+ Comment[cs]=Nahrát videa přímo na YouTube
+ Comment[da]=Upload videoer direkte til YouTube

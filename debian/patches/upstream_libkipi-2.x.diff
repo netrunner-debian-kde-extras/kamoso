@@ -1,0 +1,165 @@
+Author: Rex Dieter <rdieter@math.unl.edu>
+Author: Sando Mani <manisandro@gmail.com>
+Description: Support for libkipi 2.x
+Origin: upstream, commit:a0aec903b36b52bda1a9a5d2e875af1063747a86, commit:9f32257a1e930b16e64508e6fbfa9390fc0322ee
+
+--- a/src/kamoso.cpp
++++ b/src/kamoso.cpp
+@@ -45,6 +45,7 @@
+     #include <solid/control/powermanager.h>
+ #endif
+ 
++#include <QItemSelection>
+ #include <QLayout>
+ #include <QPushButton>
+ #include <QToolButton>
+@@ -77,6 +78,7 @@
+ 
+ #include <libkipi/plugin.h>
+ #include <libkipi/pluginloader.h>
++#include <libkipi/version.h>
+ #include <KPluginInfo>
+ 
+ const int max_exponential_value = 50;
+@@ -189,7 +191,13 @@
+     connect(mTracker, SIGNAL(urlsChanged(KUrl::List)), SLOT(updateThumbnails(KUrl::List)));
+ 
+     QMetaObject::invokeMethod(this, "initialize");
++#if (KIPI_VERSION >= 0x020000)
++    mPluginLoader = new KIPI::PluginLoader();
++    mPluginLoader->setInterface(new KIPIInterface(this));
++    mPluginLoader->init();
++#else
+     mPluginLoader = new KIPI::PluginLoader(QStringList(), new KIPIInterface(this), "");
++#endif
+ }
+ 
+ KUrl::List Kamoso::selectedItems()
+--- a/src/kamoso.h
++++ b/src/kamoso.h
+@@ -36,6 +36,7 @@
+ class WebcamRetriever;
+ class CountdownWidget;
+ class KDirOperator;
++class QItemSelection;
+ class QStackedLayout;
+ class QSplitter;
+ class QPushButton;
+--- a/src/kipiaction.cpp
++++ b/src/kipiaction.cpp
+@@ -19,7 +19,7 @@
+ 
+ #include "kipiaction.h"
+ #include <libkipi/plugin.h>
+-#include <libkipi/exportinterface.h>
++#include "plugins/exportinterface.h"
+ #include <QDebug>
+ #include "kamoso.h"
+ #include "kamosojobtracker.h"
+@@ -33,7 +33,7 @@
+ void KipiAction::runJob()
+ {
+     KIPI::Plugin* p=pluginInfo->plugin();
+-    KIPI::ExportInterface* ep=dynamic_cast<KIPI::ExportInterface*>(p);
++    ExportInterface* ep=dynamic_cast<ExportInterface*>(p);
+ 
+     KJob* job=ep->exportFiles(i18n("Kamoso"));
+     mKamoso->tracker()->registerJob(job, mKamoso->selectedItems(), icon());
+--- a/src/pluginTester/fakekipiaction.cpp
++++ b/src/pluginTester/fakekipiaction.cpp
+@@ -20,10 +20,10 @@
+ #include "fakekipiaction.h"
+ 
+ #include <libkipi/plugin.h>
+-#include <libkipi/exportinterface.h>
+ #include <KIO/JobUiDelegate>
+ #include <kjobtrackerinterface.h>
+ #include <KDebug>
++#include "../plugins/exportinterface.h"
+ 
+ FakeKipiAction::FakeKipiAction(KIPI::PluginLoader::Info* pluginInfo, QObject* parent)
+     : QAction(pluginInfo->icon(), pluginInfo->name(), parent), pluginInfo(pluginInfo)
+@@ -39,7 +39,7 @@
+ void FakeKipiAction::runJob()
+ {
+     KIPI::Plugin* p=pluginInfo->plugin();
+-    KIPI::ExportInterface* ep = dynamic_cast<KIPI::ExportInterface*>(p);
++    ExportInterface* ep = dynamic_cast<ExportInterface*>(p);
+ 
+     m_job = ep->exportFiles(i18n("Kamoso"));
+     KIO::getJobTracker()->registerJob(m_job);
+--- a/src/pluginTester/pluginTester.cpp
++++ b/src/pluginTester/pluginTester.cpp
+@@ -26,6 +26,7 @@
+ #include <KCmdLineArgs>
+ #include <libkipi/plugin.h>
+ #include <libkipi/pluginloader.h>
++#include <libkipi/version.h>
+ 
+ PluginTester::PluginTester(QObject *parent) : QObject(parent)
+ {
+@@ -41,7 +42,13 @@
+         kurlList.append(KUrl(args->arg(i)));
+     }
+ 
++#if (KIPI_VERSION >= 0x020000)
++    m_pluginLoader = new KIPI::PluginLoader();
++    m_pluginLoader->setInterface(new FakeKIPIInterface(kurlList));
++    m_pluginLoader->init();
++#else
+     m_pluginLoader = new KIPI::PluginLoader(QStringList(), new FakeKIPIInterface(kurlList), "");
++#endif
+ 
+     bool found = false;
+     Q_FOREACH(KIPI::PluginLoader::Info *pluginInfo, m_pluginLoader->pluginList()) {
+@@ -58,4 +65,4 @@
+ PluginTester::~PluginTester()
+ {
+     delete m_action;
+-}
+\ No newline at end of file
++}
+--- a/src/plugins/CMakeLists.txt
++++ b/src/plugins/CMakeLists.txt
+@@ -30,5 +30,5 @@
+ # MACRO_OPTIONAL_FIND_PACKAGE(KdepimLibs) # For Calendar (libkcal).
+ # MACRO_OPTIONAL_FIND_PACKAGE(QCA2)       # For Shwup.
+ 
+-include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/plugins/youtube)
++include_directories(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/src/plugins ${CMAKE_SOURCE_DIR}/src/plugins/youtube)
+ add_subdirectory(youtube)
+--- /dev/null
++++ b/src/plugins/exportinterface.h
+@@ -0,0 +1,15 @@
++#ifndef EXPORTINTERFACE_H
++#define EXPORTINTERFACE_H
++
++class KJob;
++
++class ExportInterface
++{
++public:
++
++    virtual ~ExportInterface() {}
++
++    virtual KJob* exportFiles(const QString& albumname)=0;
++};
++
++#endif // EXPORTINTERFACE_H
+--- a/src/plugins/youtube/kipiplugin_youtube.h
++++ b/src/plugins/youtube/kipiplugin_youtube.h
+@@ -22,12 +22,11 @@
+ #include <kwallet.h>
+ #include <KIO/Job>
+ #include <libkipi/plugin.h>
+-#include <libkipi/exportinterface.h>
++#include <exportinterface.h>
+ 
+-class YoutubePlugin : public KIPI::Plugin, public KIPI::ExportInterface
++class YoutubePlugin : public KIPI::Plugin, public ExportInterface
+ {
+ 	Q_OBJECT
+-	Q_INTERFACES(KIPI::ExportInterface)
+ 	public:
+ 		YoutubePlugin(QObject* parent, const QVariantList& args);
+ // 		virtual QAction* thumbnailsAction(const QList<KUrl>& url);
