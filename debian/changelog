@@ -6,6 +6,7 @@ kamoso (2.0.2-3) UNRELEASED; urgency=medium
   * Update watch file to http://downloads.kde.org
   * Backport upstream commit b85e8c187b4eabf9765bc05348f6232ba32c9493
     to build against QtGstreamer 1.0 API
+  * Change qt-gstreamer build and installation depends to 1.0 API.
 
  -- Diane Trout <diane@ghic.org>  Tue, 26 May 2015 19:20:12 -0700
 

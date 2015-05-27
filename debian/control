@@ -6,7 +6,7 @@ Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
 Build-Depends: debhelper (>= 9), pkg-kde-tools (>= 0.5.0),
  cmake, kdelibs5-dev, libkipi-dev,
  shared-desktop-ontologies,
- libqtgstreamer-dev, libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev,
+ libqtgstreamer-dev, libgstreamer1.0-dev, libgstreamer-plugins-base1.0-dev,
  libglib2.0-dev
 Standards-Version: 3.9.4
 Homepage: http://www.kde-apps.org/content/show.php/Kamoso?content=111750
@@ -16,7 +16,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-kde/kde-extras/kamoso.git;a
 Package: kamoso
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- gstreamer0.10-x, gstreamer0.10-plugins-good
+ gstreamer1.0-x, gstreamer1.0-plugins-good
 Recommends: kipi-plugins
 Description: tool to take pictures and videos from your webcam
  Kamoso is a utility that does the very simple actions a webcam offers,
