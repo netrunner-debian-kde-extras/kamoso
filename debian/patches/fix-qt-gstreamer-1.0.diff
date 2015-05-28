@@ -1,0 +1,49 @@
+Author: Diane Trout <diane@ghic.org>
+Description: Make slight modifications to properly capture via the webcam.
+ For some reason the upstream patch didn't quite work for me, and I
+ needed to copy the following few things from my initial port to get
+ it to work.
+ .
+ This should only be temporary as upstream has moved on to a kf5 version
+ that should replace this soon.
+--- a/src/webcamwidget.cpp
++++ b/src/webcamwidget.cpp
+@@ -131,7 +131,8 @@
+     QByteArray pipe = basicPipe();
+ 
+     //Set the right colorspace to convert to QImage
+-    pipe += " ! videoconvert"
++    pipe += " ! videoconvert ! "
++            GST_VIDEO_CAPS_MAKE("RGB")
+             " ! fakesink name=fakesink";
+ 
+     kDebug() << "================ PIPELINE ================";
+@@ -247,11 +248,12 @@
+             kDebug() << "Not I420";
+         }
+ 
+-    } else if (qstrcmp(structure.data()->name().toLatin1(), "video/x-raw-rgb") == 0) {
++    } else if (format == "RGB") {
+         kDebug() << "RGB name";
+         QImage::Format format = QImage::Format_Invalid;
+         int bpp = structure.data()->value("bpp").get<int>();
+ 
++        bpp = 24;  // FIXME: HACK
+         if (bpp == 24)
+             format = QImage::Format_RGB888;
+         else if (bpp == 32)
+@@ -399,10 +401,10 @@
+     //Accepted capabilities
+     pipe +=
+     " ! videoconvert"
+-    " ! video/x-raw, format=RGB, width=640, height=480, framerate=15/1;"
+-    " video/x-raw, format=RGB, width=640, height=480, framerate=24/1;"
+-    " video/x-raw, format=RGB, width=640, height=480, framerate=30/1;"
+-    " video/x-raw, format=RGB, width=352, height=288, framerate=15/1"
++    " ! video/x-raw, width=640, height=480, framerate=15/1;"
++    " video/x-raw, width=640, height=480, framerate=24/1;"
++    " video/x-raw, width=640, height=480, framerate=30/1;"
++    " video/x-raw, width=352, height=288, framerate=15/1"
+ 
+     //Basic plug-in for video controls
+     " ! gamma name=gamma"
