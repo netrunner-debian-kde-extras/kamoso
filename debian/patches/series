@@ -4,3 +4,4 @@ dont_build_plugin_tester.diff
 upstream_add-include.patch
 upstream_libkipi-2.x.diff
 upstream_rename-icons.diff
+qt-gstreamer-1.0.diff
