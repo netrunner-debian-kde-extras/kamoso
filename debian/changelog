@@ -1,9 +1,13 @@
-kamoso (2.9.90~git20150427-0ubuntu1) UNRELEASED; urgency=medium
+kamoso (3.0.0-0ubuntu1) UNRELEASED; urgency=medium
 
+  [ Clive Johnston ]
+  * New upstream release
+
+  [ Jonathan Riddell ]
   * New upstream snapshot of kf5 version
   * Port packaging to pkg-kde v3
 
- -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 27 Apr 2015 15:15:53 +0200
+ -- Clive Johnston <clivejo@aol.com>  Wed, 27 May 2015 23:21:56 +0100
 
 kamoso (2.0.2-2ubuntu3) utopic; urgency=medium
 

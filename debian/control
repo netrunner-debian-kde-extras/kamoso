@@ -2,24 +2,27 @@ Source: kamoso
 Section: kde
 Priority: extra
 Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
 Build-Depends: cmake,
                debhelper (>= 9),
                extra-cmake-modules,
                kdoctools-dev,
                kio-dev,
                libglib2.0-dev,
-               libkf5config-dev,
+               libgstreamer-plugins-base0.10-dev,
+               libgstreamer0.10-dev,
                libkf5configwidgets-dev,
                libkf5declarative-dev,
-               libkf5i18n-dev,
                libkf5purpose-dev,
                libkf5solid-dev,
-               libkf5widgetsaddons-dev,
+               libkipi-dev,
                libqt5gstreamer-dev,
                libqt5opengl5-dev,
+               libqtgstreamer-dev,
                libudev-dev,
-               pkg-kde-tools (>= 0.15),
-               qtbase5-dev
+               pkg-kde-tools (>= 0.5.0),
+               qtbase5-dev,
+               qtdeclarative5-dev
 Standards-Version: 3.9.6
 Homepage: https://projects.kde.org/projects/extragear/multimedia/kamoso
 Vcs-Git: git://anonscm.debian.org/pkg-kde/kde-extras/kamoso.git
@@ -27,12 +30,22 @@ Vcs-Browser: http://anonscm.debian.org/cgit/pkg-kde/kde-extras/kamoso.git
 
 Package: kamoso
 Architecture: any
-Depends: gstreamer1.0-plugins-good,
+Depends: gstreamer0.10-plugins-good,
+         gstreamer0.10-x,
+         kio,
+         kipi-plugins,
+         phonon4qt5-backend-gstreamer,
+         qml-module-org-kde-kquickcontrolsaddons,
+         qml-module-qtgstreamer,
+         qml-module-qtmultimedia,
+         qml-module-qtquick-controls,
+         qml-module-qtquick-dialogs,
          qml-modules-org-kde-purpose,
          qtgstreamer-plugins-qt5,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: tool to take pictures and videos from your webcam
- Kamoso is a utility that does the very simple actions a webcam offers,
- like taking pictures or recording videos and adds some extra features
- that will make the webcam usage both funnier and more useful.
+ Kamoso is a utility that does the very simple actions a webcam
+ offers, like taking pictures or recording videos and adds some extra
+ features that will make the webcam usage both funnier and more
+ useful.
