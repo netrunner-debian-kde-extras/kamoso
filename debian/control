@@ -1,7 +1,8 @@
 Source: kamoso
 Section: kde
 Priority: extra
-Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
 Uploaders: José Manuel Santamaría Lema <panfaust@gmail.com>
 Build-Depends: cmake,
                debhelper (>= 9),
@@ -9,16 +10,12 @@ Build-Depends: cmake,
                kdoctools-dev,
                kio-dev,
                libglib2.0-dev,
-               libgstreamer-plugins-base0.10-dev,
-               libgstreamer0.10-dev,
                libkf5configwidgets-dev,
                libkf5declarative-dev,
                libkf5purpose-dev,
                libkf5solid-dev,
-               libkipi-dev,
                libqt5gstreamer-dev,
                libqt5opengl5-dev,
-               libqtgstreamer-dev,
                libudev-dev,
                pkg-kde-tools (>= 0.5.0),
                qtbase5-dev,
@@ -30,11 +27,7 @@ Vcs-Browser: http://anonscm.debian.org/cgit/pkg-kde/kde-extras/kamoso.git
 
 Package: kamoso
 Architecture: any
-Depends: gstreamer0.10-plugins-good,
-         gstreamer0.10-x,
-         kio,
-         kipi-plugins,
-         phonon4qt5-backend-gstreamer,
+Depends: kio,
          qml-module-org-kde-kquickcontrolsaddons,
          qml-module-qtgstreamer,
          qml-module-qtmultimedia,
