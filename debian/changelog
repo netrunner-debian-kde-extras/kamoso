@@ -1,6 +1,7 @@
 kamoso (3.0-0ubuntu1) UNRELEASED; urgency=medium
 
   * New upstream release
+  * Updating watch file
 
  -- Clive Johnston <clivejo@aol.com>  Thu, 24 Sep 2015 17:33:54 +0100
 

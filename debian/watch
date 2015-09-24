@@ -1,4 +1,4 @@
 version=3
 
-http://download.kde.org/stable/kamoso/([\d\.]+)/src/kamoso-([\d\.]+).tar.bz2
-http://download.kde.org/unstable/kamoso/([\d\.]+)/src/kamoso-([\d\.]+).tar.bz2
+http://download.kde.org/stable/kamoso/([\d\.]+)/src/kamoso-([\d\.]+).tar.xz
+http://download.kde.org/unstable/kamoso/([\d\.]+)/src/kamoso-([\d\.]+).tar.xz
