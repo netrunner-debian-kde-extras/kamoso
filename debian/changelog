@@ -1,4 +1,4 @@
-kamoso (2.0.2-3) UNRELEASED; urgency=medium
+kamoso (2.0.2-3) unstable; urgency=medium
 
   * Team upload.
 
@@ -9,9 +9,9 @@ kamoso (2.0.2-3) UNRELEASED; urgency=medium
   * Change qt-gstreamer build and installation depends to 1.0 API.
   * Bump Standards-Version to 3.9.6, no changes required.
   * Add fix-qt-gstreamer-1.0.diff to apply a few hacks to
-    get the pipeline actually opent the webcam and write files.
+    get the pipeline actually open the webcam and write files.
 
- -- Diane Trout <diane@ghic.org>  Tue, 26 May 2015 19:20:12 -0700
+ -- Diane Trout <diane@ghic.org>  Wed, 27 May 2015 20:07:29 -0700
 
 kamoso (2.0.2-2) unstable; urgency=low
 
