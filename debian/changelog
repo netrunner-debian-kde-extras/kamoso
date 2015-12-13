@@ -1,3 +1,10 @@
+kamoso (3.1.0-0r1) UNRELEASED; urgency=medium
+
+  [ Pino Toscano ]
+  * New upstream release.
+
+ -- Debian KDE Extras Team <pkg-kde-extras@lists.alioth.debian.org>  Sun, 13 Dec 2015 14:33:09 +0100
+
 kamoso (2.0.2-3.1) unstable; urgency=medium
 
   * Non-maintainer upload.
