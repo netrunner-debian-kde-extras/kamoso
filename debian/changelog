@@ -1,3 +1,11 @@
+kamoso (2.0.2-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+     Also include /usr/lib/<triplet>/gstreamer-<version>/include.
+     (Closes: #801592)
+
+ -- YunQiang Su <syq@debian.org>  Mon, 12 Oct 2015 18:11:57 +0800
+
 kamoso (2.0.2-3) unstable; urgency=medium
 
   * Team upload.

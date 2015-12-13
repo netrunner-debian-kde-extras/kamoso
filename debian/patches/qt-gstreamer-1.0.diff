@@ -1,9 +1,11 @@
 Author:  Andreas Cord-Landwehr <cordlandwehr@kde.org>
 Description: Porting to GStreamer-1.0 API and QtGstreamer 1.2
 Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/repository/revisions/b85e8c187b4eabf9765bc05348f6232ba32c9493
+Index: b/CMakeLists.txt
+===================================================================
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -6,8 +6,8 @@
+@@ -6,8 +6,8 @@ find_package(KDE4 REQUIRED)
  find_package(Kipi REQUIRED)
  find_package(Phonon REQUIRED)
  find_package(GLIB2 REQUIRED)
@@ -14,7 +16,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  
  macro_optional_find_package(Nepomuk)
  macro_log_feature(NEPOMUK_FOUND "Nepomuk" "Handles all kinds of metadata on the KDE desktop to provide a semantic desktop" "http://nepomuk.kde.org/" FALSE "" "STRONGLY_RECOMMENDED: Nepomuk is used to provide metadata on objects like files, emails etc. to provide a semantic desktop.")
-@@ -15,6 +15,10 @@
+@@ -15,6 +15,10 @@ macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPO
  macro_display_feature_log()
  include_directories(${CMAKE_CURRENT_BINARY_DIR})
  
@@ -25,9 +27,11 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  add_subdirectory(src)
  add_subdirectory(icons)
  
+Index: b/cmake/FindGStreamer.cmake
+===================================================================
 --- a/cmake/FindGStreamer.cmake
 +++ b/cmake/FindGStreamer.cmake
-@@ -15,40 +15,38 @@
+@@ -15,40 +15,44 @@
  
  # TODO: Other versions --> GSTREAMER_X_Y_FOUND (Example: GSTREAMER_0_8_FOUND and GSTREAMER_0_10_FOUND etc)
  
@@ -59,11 +63,14 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
     PATHS
     ${PKG_GSTREAMER_INCLUDE_DIRS}
 -   PATH_SUFFIXES gstreamer-0.10
--   )
--
++   PATH_SUFFIXES gstreamer-${GSTREAMER_API_VERSION}
+    )
+ 
 -FIND_LIBRARY(GSTREAMER_LIBRARIES NAMES gstreamer-0.10
--   PATHS
++FIND_PATH(GSTREAMER_ARCH_INCLUDE_DIR gst/gstconfig.h
+    PATHS
 -   ${PKG_GSTREAMER_LIBRARY_DIRS}
++   ${PKG_GSTREAMER_INCLUDE_DIRS}
 +   PATH_SUFFIXES gstreamer-${GSTREAMER_API_VERSION}
     )
  
@@ -78,7 +85,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
     PATHS
     ${PKG_GSTREAMER_LIBRARY_DIRS}
     )
-@@ -63,12 +61,7 @@
+@@ -63,12 +67,7 @@ ELSE (GSTREAMER_LIBRARIES)
     MESSAGE(STATUS "GStreamer: WARNING: library not found")
  ENDIF (GSTREAMER_LIBRARIES)
  
@@ -93,6 +100,8 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  
 -MARK_AS_ADVANCED(GSTREAMER_INCLUDE_DIR GSTREAMER_LIBRARIES GSTREAMER_BASE_LIBRARY GSTREAMER_INTERFACE_LIBRARY)
 +MARK_AS_ADVANCED(GSTREAMER_INCLUDE_DIR GSTREAMER_LIBRARIES GSTREAMER_BASE_LIBRARY)
+Index: b/src/webcamwidget.cpp
+===================================================================
 --- a/src/webcamwidget.cpp
 +++ b/src/webcamwidget.cpp
 @@ -55,8 +55,9 @@
@@ -106,7 +115,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  #include <gst/gst.h>
  #include <gst/video/video.h>
  #include <QGst/Bus>
-@@ -130,8 +131,7 @@
+@@ -130,8 +131,7 @@ void WebcamWidget::playFile(const Device
      QByteArray pipe = basicPipe();
  
      //Set the right colorspace to convert to QImage
@@ -116,7 +125,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
              " ! fakesink name=fakesink";
  
      kDebug() << "================ PIPELINE ================";
-@@ -157,7 +157,7 @@
+@@ -157,7 +157,7 @@ void WebcamWidget::playFile(const Device
      setVideoSettings();
  
      kDebug() << "================ Capabilities ================";
@@ -125,7 +134,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
      d->m_pipeline->setState(QGst::StatePlaying);
  }
  
-@@ -179,34 +179,51 @@
+@@ -179,34 +179,51 @@ bool WebcamWidget::takePhoto(const KUrl
      }
      kDebug() << dest;
      d->destination = dest;
@@ -181,7 +190,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  
              for (int y=0; y<height; y+=2) {
                  const uchar *yLine = data + y*width;
-@@ -225,6 +242,7 @@
+@@ -225,6 +242,7 @@ void WebcamWidget::photoGstCallback(QGst
                      img.setPixel(x/2,y/2,qRgb(r,g,b));
                  }
              }
@@ -189,7 +198,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
          } else {
              kDebug() << "Not I420";
          }
-@@ -240,11 +258,23 @@
+@@ -240,11 +258,23 @@ void WebcamWidget::photoGstCallback(QGst
              format = QImage::Format_RGB32;
  
          if (format != QImage::Format_Invalid) {
@@ -214,7 +223,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
          }
      }
  
-@@ -285,7 +315,7 @@
+@@ -285,7 +315,7 @@ void WebcamWidget::recordVideo(bool soun
          //Get the audio from alsa
          " ! mux. autoaudiosrc "
          //Sound type and quality
@@ -223,7 +232,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
          //Encode sound as vorbis
          " ! queue ! audioconvert ! queue "
          " ! vorbisenc "
-@@ -368,11 +398,11 @@
+@@ -368,11 +398,11 @@ QByteArray WebcamWidget::basicPipe()
  
      //Accepted capabilities
      pipe +=
@@ -240,7 +249,7 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  
      //Basic plug-in for video controls
      " ! gamma name=gamma"
-@@ -424,7 +454,7 @@
+@@ -424,7 +454,7 @@ void WebcamWidget::activeAspectRatio()
  {
      QGst::BinPtr sink = d->m_bin->getElementByName("videosink").staticCast<QGst::Bin>();
  
@@ -249,3 +258,13 @@ Applied-Upstream: https://projects.kde.org/projects/extragear/multimedia/kamoso/
  
      if (over->findProperty("force-aspect-ratio")) {
          kDebug() << "Setting aspect ratio";
+Index: b/src/CMakeLists.txt
+===================================================================
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${KIPI_INCLUDE_DIR} ${QTGSTREAMER_INCLUDE_DIR} ${GLIB2_INCLUDE_DIR} ${GSTREAMER_INCLUDE_DIR})
++include_directories(${KDE4_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${KIPI_INCLUDE_DIR} ${QTGSTREAMER_INCLUDE_DIR} ${GLIB2_INCLUDE_DIR} ${GSTREAMER_INCLUDE_DIR} ${GSTREAMER_ARCH_INCLUDE_DIR})
+ 
+ add_definitions(-DGST_DISABLE_DEPRECATED)
+ add_definitions(-fexceptions)
